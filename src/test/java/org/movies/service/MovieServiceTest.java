@@ -71,4 +71,17 @@ public class MovieServiceTest {
         List<Integer> moviesIds = movies.stream().map(movie -> movie.getId()).collect(Collectors.toList());
         assertThat(moviesIds, CoreMatchers.is(Arrays.asList(4, 8)));
     }
+
+    @Test
+    public void returnMoviesByGenreAndByDuration() {
+        String name = null; // no queremos buscar por nombre
+        Integer minutes = 150; // 2h 30m
+        Genre genre = Genre.ACTION;
+        Movie template = new Movie(name, minutes, genre);
+
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(template);
+        List<Integer> moviesIds = movies.stream().map(movie -> movie.getId()).collect(Collectors.toList());
+        assertThat(moviesIds, CoreMatchers.is(Arrays.asList(7)) );
+    }
 }
